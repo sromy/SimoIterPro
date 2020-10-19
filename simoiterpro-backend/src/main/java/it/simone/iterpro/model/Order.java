@@ -1,8 +1,10 @@
 package it.simone.iterpro.model;
 
+import java.math.BigDecimal;
 import java.util.Date;
 import java.util.Set;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -28,7 +30,10 @@ public class Order {
 	@Column(name = "USER_ID")
 	private int userId;
 	
-	@OneToMany(mappedBy = "order")     
+	@Column(name = "TOTAL")
+	private BigDecimal total;
+	
+	@OneToMany(mappedBy = "orderId",cascade = CascadeType.ALL)     
 	private Set<OrderItem> items;
 
 	public int getOrderId() {
@@ -61,6 +66,14 @@ public class Order {
 
 	public void setItems(Set<OrderItem> items) {
 		this.items = items;
+	}		
+
+	public BigDecimal getTotal() {
+		return total;
+	}
+
+	public void setTotal(BigDecimal total) {
+		this.total = total;
 	}
 
 	@Override
