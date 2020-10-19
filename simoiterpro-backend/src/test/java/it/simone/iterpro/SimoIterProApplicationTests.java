@@ -1,7 +1,9 @@
 package it.simone.iterpro;
 
 import java.math.BigDecimal;
+import java.util.Calendar;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 import org.junit.jupiter.api.Test;
@@ -13,6 +15,7 @@ import it.simone.iterpro.model.OrderItem;
 import it.simone.iterpro.model.Product;
 import it.simone.iterpro.service.OrderService;
 import it.simone.iterpro.service.ProductService;
+import it.simone.iterpro.util.OrderFilter;
 
 @SpringBootTest
 class SimoIterProApplicationTests {
@@ -67,6 +70,33 @@ class SimoIterProApplicationTests {
 	void testCreateOrder() {
 		try {			
 			orderService.createOrder(1, simpleOrder());
+			assert(true);
+		} catch(Exception e) {
+			System.err.println("Err :"+e);
+			assert(false);
+		}
+	}
+	
+	@Test
+	void testSearchOrder() {
+		final Calendar yesterday = Calendar.getInstance();
+		yesterday.add(Calendar.DATE, -1);
+		final Calendar tomorrow = Calendar.getInstance();
+		tomorrow.add(Calendar.DATE, 1);
+		BigDecimal min = new BigDecimal(30);
+		BigDecimal max = new BigDecimal(1330);
+		
+		try {			
+			OrderFilter filter = new OrderFilter();
+			filter.setUserId(1);
+			filter.setStartDate(yesterday.getTime());
+			filter.setEndDate(tomorrow.getTime());
+			filter.setMinTotal(min);
+			filter.setMaxTotal(max);
+			List<Order> list = orderService.getOrderByFilters(filter);
+			for (Order o : list) {
+				System.out.println("Ordine :: "+o.getOrderId());
+			}
 			assert(true);
 		} catch(Exception e) {
 			System.err.println("Err :"+e);

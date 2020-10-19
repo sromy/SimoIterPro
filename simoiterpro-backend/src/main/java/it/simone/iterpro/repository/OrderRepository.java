@@ -6,7 +6,7 @@ import org.springframework.stereotype.Repository;
 import it.simone.iterpro.model.Order;
 
 @Repository
-public interface OrderRepository extends CrudRepository<Order, Integer>{
+public interface OrderRepository extends CrudRepository<Order, Integer>,OrderRepositoryCustom {
 
 	
 }

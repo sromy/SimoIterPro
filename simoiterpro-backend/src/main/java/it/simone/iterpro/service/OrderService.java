@@ -3,6 +3,7 @@ package it.simone.iterpro.service;
 import java.math.BigDecimal;
 import java.util.Date;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Optional;
 import java.util.Set;
 
@@ -18,6 +19,7 @@ import it.simone.iterpro.model.Order;
 import it.simone.iterpro.model.OrderItem;
 import it.simone.iterpro.model.Product;
 import it.simone.iterpro.repository.OrderRepository;
+import it.simone.iterpro.util.OrderFilter;
 
 @Service
 public class OrderService {
@@ -64,5 +66,9 @@ public class OrderService {
 			throw new DoesNotExistException("Order");
 		}
 		return order.get();
+	}
+	
+	public List<Order> getOrderByFilters(OrderFilter filter) {
+		return orderRepository.getListByFilters(filter);
 	}
 }
