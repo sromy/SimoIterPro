@@ -27,4 +27,14 @@ services:
       - TZ=Europe/Berlin
     volumes:
       - D:\Lavoro\DockerProjects\Keycloak\db:/opt/jboss/keycloak/standalone/data
+      
+  db:
+    image: mysql:5.7
+    ports:
+      - "3306:3306"
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+    volumes:
+      - D:\Lavoro\DockerProjects\MySQL\db_data:/var/lib/mysql
+      - D:\Lavoro\DockerProjects\MySQL\db\init.sql:/docker-entrypoint-initdb.d/init.sql
     

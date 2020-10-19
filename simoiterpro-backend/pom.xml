@@ -1,15 +1,25 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
-  <modelVersion>4.0.0</modelVersion>
-  <parent>
-    <groupId>it.simone.iterpro</groupId>
-    <artifactId>simoiterpro</artifactId>
-    <version>1.0.0</version>
-  </parent>
-  <artifactId>simoiterpro-backend</artifactId>
+  	<modelVersion>4.0.0</modelVersion>
   
-  <properties>
+    <groupId>it.simone.iterpro</groupId>
+    <artifactId>simoiterpro-backend</artifactId>
+    <version>1.0.0</version>
+    <packaging>war</packaging>
+    
+    <name>SimoIterPro - Backend</name>
+  	<description>Demo for Iterpro</description>
+    
+    <parent>
+		<groupId>org.springframework.boot</groupId>
+		<artifactId>spring-boot-starter-parent</artifactId>
+		<version>2.3.1.RELEASE</version>
+		<relativePath/> <!-- lookup parent from repository -->
+	  </parent>
+  
+  	<properties>
 		<java.version>1.8</java.version>
 		<keycloak.version>10.0.0</keycloak.version>
+		<hibernate.entitymanager.version>5.4.2.Final</hibernate.entitymanager.version>
 		<skipTests>true</skipTests>
 	</properties>		
 
@@ -22,10 +32,30 @@
 		</dependency>
 
 		<!-- Spring Data JPA with Hibernate -->
-		<!-- dependency>
+		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-data-jpa</artifactId>
-		</dependency-->
+		</dependency>
+		
+		<!-- JPA Provider (Hibernate) -->
+		<dependency>
+		    <groupId>org.hibernate</groupId>
+		    <artifactId>hibernate-entitymanager</artifactId>
+		    <version>${hibernate.entitymanager.version}</version>
+		</dependency>
+		
+		<!-- MY SQL -->
+		<dependency>
+			<groupId>mysql</groupId>
+			<artifactId>mysql-connector-java</artifactId>
+		</dependency>
+		
+		<!-- https://mvnrepository.com/artifact/org.apache.commons/commons-lang3 -->
+		<dependency>
+		    <groupId>org.apache.commons</groupId>
+		    <artifactId>commons-lang3</artifactId>
+		    <version>3.11</version>
+		</dependency>
 
 		<!-- Provides solutions to automatically pick up changes without a complete 
 			server restart. -->
@@ -33,6 +63,13 @@
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-devtools</artifactId>
 			<scope>runtime</scope>
+		</dependency>
+		
+		<!-- https://mvnrepository.com/artifact/javax.validation/validation-api -->
+		<dependency>
+		    <groupId>javax.validation</groupId>
+		    <artifactId>validation-api</artifactId>
+		    <version>2.0.1.Final</version>
 		</dependency>
 
 		<!-- The Keycloak Spring Boot adapter takes advantage of Spring Boot’s 
@@ -43,6 +80,7 @@
 			<artifactId>keycloak-spring-boot-starter</artifactId>
 		</dependency> -->
 		
+		<!-- TEST JUNIT -->
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-test</artifactId>
@@ -53,6 +91,16 @@
 					<artifactId>junit-vintage-engine</artifactId>
 				</exclusion>
 			</exclusions>
+		</dependency>		
+		<dependency>
+			<groupId>org.junit.jupiter</groupId>
+			<artifactId>junit-jupiter-engine</artifactId>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.junit.platform</groupId>
+			<artifactId>junit-platform-launcher</artifactId>
+			<scope>test</scope>
 		</dependency>
 		
 	</dependencies>
