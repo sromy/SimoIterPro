@@ -16,6 +16,8 @@ services:
       dockerfile: Dockerfile
     ports: 
       - "8080:8081"
+    depends_on:
+      - db  
       
   keycloak:
     image: quay.io/keycloak/keycloak:10.0.0

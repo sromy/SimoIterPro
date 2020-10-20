@@ -1,5 +1,5 @@
 {
     "/simoiterpro-api/*": {
-        "target": "http://backend:8081"
+        "target": "http://localhost:8081"
     }
 }

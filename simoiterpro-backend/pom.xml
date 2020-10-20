@@ -74,11 +74,11 @@
 
 		<!-- The Keycloak Spring Boot adapter takes advantage of Spring Boot’s 
 			autoconfiguration so all you need to do is add the Keycloak Spring Boot starter 
-			to your project. 
+			to your project. -->
 		<dependency>
 			<groupId>org.keycloak</groupId>
 			<artifactId>keycloak-spring-boot-starter</artifactId>
-		</dependency> -->
+		</dependency> 
 		
 		<!-- TEST JUNIT -->
 		<dependency>
@@ -106,7 +106,7 @@
 	</dependencies>
 	
 	<!-- The Keycloak BOM is needed for some other dependencies to make it work -->
-	<!-- dependencyManagement>
+	<dependencyManagement>
 		<dependencies>
 			<dependency>
 				<groupId>org.keycloak.bom</groupId>
@@ -116,7 +116,7 @@
 				<scope>import</scope>
 			</dependency>
 		</dependencies>
-	</dependencyManagement-->
+	</dependencyManagement>
 	
 	<build>
 		<finalName>simoiterpro-backend</finalName>
