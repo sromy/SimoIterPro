@@ -1,6 +1,8 @@
 package it.simone.iterpro.service;
 
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 import java.util.Optional;
 
 import org.slf4j.Logger;
@@ -20,6 +22,12 @@ public class ProductService {
 	@Autowired
 	private ProductRepository productRepository;
 	
+	public List<Product> getProducts() {
+		List<Product> list = new ArrayList<>();
+		productRepository.findAll().forEach(e -> list.add(e));
+		return list;
+	}
+	
 	public Product getProduct(int id) throws DoesNotExistException {
 		Optional<Product> product = productRepository.findById(id);
 		if (!product.isPresent()) {
@@ -35,8 +43,9 @@ public class ProductService {
 	}
 	
 	public Product updateProduct(int productId, Product product) throws DoesNotExistException {
-		this.getProduct(productId);
+		Product savedProduct = this.getProduct(productId);
 		product.setProductId(productId);
+		product.setCreationDate(savedProduct.getCreationDate());
 		return productRepository.save(product);
 	}
 	

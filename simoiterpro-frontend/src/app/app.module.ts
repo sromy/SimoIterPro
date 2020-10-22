@@ -7,11 +7,16 @@ import {BsDropdownModule} from 'ngx-bootstrap/dropdown'
 import {CollapseModule} from 'ngx-bootstrap/collapse'
 import {TooltipModule} from 'ngx-bootstrap/tooltip'
 import {ModalModule} from 'ngx-bootstrap/modal'
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { environment } from 'src/environments/environment';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
+import { ProductsComponent } from './components/products/products.component';
+import { OrdersComponent } from './components/orders/orders.component';
+import { MyOrdersComponent } from './components/my-orders/my-orders.component';
+import { MessageComponent } from './components/message/message.component';
 
 export function kcInitializer(keycloak: KeycloakService): () => Promise<any> {
 
@@ -39,12 +44,18 @@ export function kcInitializer(keycloak: KeycloakService): () => Promise<any> {
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    ProductsComponent,
+    OrdersComponent,
+    MyOrdersComponent,
+    MessageComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
+    FormsModule,
+    ReactiveFormsModule,
     KeycloakAngularModule,
     BrowserAnimationsModule,
     CollapseModule.forRoot(),
