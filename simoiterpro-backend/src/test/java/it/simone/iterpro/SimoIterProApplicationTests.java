@@ -69,7 +69,7 @@ class SimoIterProApplicationTests {
 	@Test
 	void testCreateOrder() {
 		try {			
-			orderService.createOrder(1, simpleOrder());
+			orderService.createOrder("1", simpleOrder());
 			assert(true);
 		} catch(Exception e) {
 			System.err.println("Err :"+e);
@@ -88,7 +88,7 @@ class SimoIterProApplicationTests {
 		
 		try {			
 			OrderFilter filter = new OrderFilter();
-			filter.setUserId(1);
+			filter.setUserId("1");
 			filter.setStartDate(yesterday.getTime());
 			filter.setEndDate(tomorrow.getTime());
 			filter.setMinTotal(min);

@@ -37,7 +37,7 @@ public class OrderController {
 	}
 	
 	@PostMapping("/orders")
-	public Order createOrder(@RequestParam("userId") int userId, @Valid @RequestBody Order order) throws Exception {
+	public Order createOrder(@RequestParam("userId") String userId, @Valid @RequestBody Order order) throws Exception {
 		return orderService.createOrder(userId, order);
 	}
 	
@@ -47,7 +47,7 @@ public class OrderController {
 	}
 	
 	@GetMapping("/orders")
-	public List<Order> searchOrder(@RequestParam("userId") int userId,
+	public List<Order> searchOrder(@RequestParam("userId") String userId,
 								   @RequestParam("minTotal") Optional<String> minTotal,
 								   @RequestParam("maxTotal") Optional<String> maxTotal,
 								   @RequestParam("startDate") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) Optional<Date> startDate,

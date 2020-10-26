@@ -6,8 +6,11 @@ import { BsModalRef } from 'ngx-bootstrap/modal/bs-modal-ref.service';
 
 import { ProductService } from '../../services/product.service';
 import { MessageService } from '../../services/message.service';
+import { UserService } from 'src/app/services/user.service';
 
 import { Product } from '../../models/product';
+import { OrderItem } from '../../models/orderitem';
+
 
 @Component({
   selector: 'app-products',
@@ -20,12 +23,14 @@ export class ProductsComponent implements OnInit {
 
   products: Product[] = [];
   productForm: FormGroup;
+  productItemForm: FormGroup;
   selectedProduct: Product;
 
   constructor(private productService: ProductService,
               private formBuilder: FormBuilder,
               private modalService: BsModalService,
-              private messageService: MessageService) { }
+              private messageService: MessageService,
+              private userService: UserService) { }
 
   ngOnInit(): void {
     this.getAllProducts();
@@ -109,5 +114,26 @@ export class ProductsComponent implements OnInit {
       }  
     });
   }
+
+  /* ADD ORDER ITEM */
+  openCreateOrderItemModal(template: TemplateRef<any>, product: Product) {   
+    this.productItemForm = this.formBuilder.group({
+      'productId' : [{value: product.productId, disabled: true}],
+      'name' : [{value: product.name, disabled: true}],
+      'price' : [{value: product.price, disabled: true}],
+      'quantity' : [null, Validators.required]
+    });
+    this.modalRef = this.modalService.show(template, {ignoreBackdropClick: true});
+  }
+
+  onCreateOrderItem() {
+    if (this.productItemForm.invalid) {
+      return;
+    }
+    let productitem = <Product>this.productItemForm.getRawValue();    
+    this.userService.addOrderItem(productitem)
+    this.modalRef.hide();
+    this.messageService.success(`OrderItem ${productitem.name} added to order.`);
+  };
 
 }

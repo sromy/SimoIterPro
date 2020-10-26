@@ -1,0 +1,75 @@
+<div class="container" *ngIf="(userinfo$ | async) as userinfo">
+    <div>
+        <span class="text-primary">
+            <i class="oi oi-basket h4"></i>
+            My Order
+        </span>
+    </div>
+    <table class="table table-bordered table-striped table-hover table-sm">
+        <thead class="bg-primary text-white">
+            <tr>
+                <th scope="col" class="w-25">Product</th>
+                <th scope="col" class="text-right" style="width:100px;">Quantity</th>
+                <th scope="col" class="text-right" style="width:100px;">Price</th>
+                <th scope="col" class="text-right" style="width:100px;">Total</th>
+                <th scope="col" class="text-center" style="width:25px;">Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngIf="(!!userinfo.order && userinfo.order.length == 0) || 
+                         (!!userinfo.order.items && userinfo.order.items.length == 0)">
+                <td colspan="5" class="table-light">
+                    <div class="text-center"><strong>No orders found</strong></div>
+                </td>
+            </tr>
+            <tr *ngFor="let orderitem of userinfo.order.items">
+                <td>{{orderitem.product.name}}</td>
+                <td class="text-right">{{orderitem.quantity}}</td>
+                <td class="text-right">{{orderitem.product.price | number:'1.2-2'}}</td>
+                <td class="text-right">{{orderitem.quantity * orderitem.product.price | number:'1.2-2'}}</td>
+                <td class="text-center">
+                    <i class="oi oi-pencil text-primary" tooltip="Edit Order Item" (click)="openEditOrderItemModal(editOrderItemTemplate, orderitem)"></i>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-primary" (click)="onCreateOrder()">Create Order</button>
+    </div>
+
+    <ng-template #editOrderItemTemplate>
+        <div class="modal-header bg-primary text-white">
+            <h5 class="modal-title">Edit Order Item</h5>
+        </div>
+        <div class="modal-body">
+            <small class="text-danger">* required fields</small>
+            <form [formGroup]="orderItemForm">
+                <div class="form-group">
+                    <label for="name">Product</label>
+                    <input type="text" formControlName="name" class="form-control" id="name">
+                </div>                               
+                <div class="form-group">
+                    <label for="price">Price</label>
+                    <input type="text" formControlName="price" class="form-control" id="price">
+                </div>
+                <div class="form-group">
+                    <label for="quantity">Quantity<span class="text-danger">*</span></label>
+                    <input type="text" formControlName="quantity" class="form-control" id="quantity" required
+                        placeholder="0" [ngClass]="{ 'is-invalid': f.quantity.touched && f.quantity.errors }">
+                    <div *ngIf="f.quantity.touched && f.quantity.errors" class="invalid-feedback">
+                        <div *ngIf="f.quantity.errors.required">Please enter a quantity!</div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="total">Total</label>
+                    <input type="text" value="{{f.price.value * f.quantity.value}}" class="form-control" id="total"
+                        disabled>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary" (click)="onUpdateOrderItem()" [disabled]="this.orderItemForm.invalid">Update</button>
+                    <button type="button" class="btn btn-secondary" (click)="modalRef.hide()">Cancel</button>
+                </div>
+            </form>
+        </div>
+    </ng-template>
+</div> 

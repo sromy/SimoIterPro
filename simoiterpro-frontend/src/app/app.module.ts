@@ -17,6 +17,7 @@ import { ProductsComponent } from './components/products/products.component';
 import { OrdersComponent } from './components/orders/orders.component';
 import { MyOrdersComponent } from './components/my-orders/my-orders.component';
 import { MessageComponent } from './components/message/message.component';
+import { CartComponent } from './components/cart/cart.component';
 
 export function kcInitializer(keycloak: KeycloakService): () => Promise<any> {
 
@@ -48,7 +49,8 @@ export function kcInitializer(keycloak: KeycloakService): () => Promise<any> {
     ProductsComponent,
     OrdersComponent,
     MyOrdersComponent,
-    MessageComponent
+    MessageComponent,
+    CartComponent
   ],
   imports: [
     BrowserModule,

@@ -2,9 +2,13 @@ import { Injectable } from '@angular/core';
 import { KeycloakService } from 'keycloak-angular'
 import { BehaviorSubject, Observable } from 'rxjs';
 import { UserInfo } from '../models/user'
+import { Order } from '../models/order'
+import { OrderItem } from '../models/orderitem'
+import { Product } from '../models/product'
 
-import { map } from 'rxjs/operators';
+import { tap,map } from 'rxjs/operators';
 import { from } from 'rxjs';
+
 
 @Injectable({
   providedIn: 'root'
@@ -32,17 +36,42 @@ export class UserService {
               this.userDetails.username = this.keycloakService.getUsername();              
               this.userDetails.isAdministrator = this.keycloakService.isUserInRole("admin");
               this.userDetails.isLoggedIn = true; 
-              this.userPrincipal$.next(this.userDetails);                                   
+              this.userDetails.order = {items:[]} as Order;
+              this.userDetails.id = this.keycloakService.getKeycloakInstance().subject;
+              this.userPrincipal$.next(this.userDetails);    
           }) 
         ).subscribe();
       }  else {
-        console.log('gia')
+        console.log('User Principal already init')
       }    
 
     }
 
     return this.userPrincipal$;
 
+  }
+
+  addOrderItem(productitem: Product) {
+    let orderitem = {product:productitem,quantity:productitem.quantity }
+    this.userDetails.order.items.push(orderitem)
+  }
+
+  updateOrderItem(productitem: Product) {
+    
+    let orderitems =  this.userDetails.order.items;
+    let orderitemIndex = this.userDetails.order.items.findIndex(item => item.product.name === productitem.name)
+
+    orderitems[orderitemIndex] = {
+      quantity: productitem.quantity,
+      product : productitem
+    }
+    
+    this.userDetails.order.items = orderitems;
+     
+  }
+
+  getCurrentOrder() {
+    return this.userDetails.order;
   }
 
   logout = async (): Promise<void> => {

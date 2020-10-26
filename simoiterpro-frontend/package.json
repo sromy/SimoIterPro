@@ -25,6 +25,7 @@
     "keycloak-angular": "^7.3.1",
     "keycloak-js": "^8.0.1",
     "ngx-bootstrap": "^6.1.0",
+    "open-iconic": "^1.1.1",
     "rxjs": "~6.6.0",
     "tslib": "^2.0.0",
     "zone.js": "~0.10.2"

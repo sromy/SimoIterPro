@@ -5,16 +5,16 @@ import java.util.Date;
 
 public class OrderFilter {
 
-	private int userId;
+	private String userId;
 	private Date startDate;
 	private Date endDate;
 	private BigDecimal minTotal;
 	private BigDecimal maxTotal;
-		
-	public int getUserId() {
+			
+	public String getUserId() {
 		return userId;
 	}
-	public void setUserId(int userId) {
+	public void setUserId(String userId) {
 		this.userId = userId;
 	}
 	public Date getStartDate() {

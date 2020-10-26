@@ -28,7 +28,7 @@ public class Order {
 	private Date creationDate;
 	
 	@Column(name = "USER_ID")
-	private int userId;
+	private String userId;
 	
 	@Column(name = "TOTAL")
 	private BigDecimal total;
@@ -50,13 +50,13 @@ public class Order {
 
 	public void setCreationDate(Date creationDate) {
 		this.creationDate = creationDate;
-	}
+	}	
 
-	public int getUserId() {
+	public String getUserId() {
 		return userId;
 	}
 
-	public void setUserId(int userId) {
+	public void setUserId(String userId) {
 		this.userId = userId;
 	}
 

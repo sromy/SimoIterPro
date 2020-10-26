@@ -33,7 +33,7 @@ public class OrderService {
 	private ProductService productService;
 	
 	@Transactional
-	public Order createOrder(int userId, Order order) throws Exception {
+	public Order createOrder(String userId, Order order) throws Exception {
 		
 		Order neworder = new Order();
 		neworder.setUserId(userId);

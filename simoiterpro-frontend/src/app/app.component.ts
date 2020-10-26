@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { UserService} from './services/user.service';
-import { BehaviorSubject, Observable } from 'rxjs';
+import { Observable } from 'rxjs';
 import { UserInfo } from './models/user'
 
 const apiUrl = '/simoiterpro-api/api/';
@@ -29,7 +29,7 @@ export class AppComponent implements OnInit {
    }
 
   getUserDetails() {
-    this.userinfo$ = this.userService.getUserInfo().asObservable();
+    this.userinfo$ = this.userService.getUserInfo().asObservable();    
   }
 
   doLogin(): void {
@@ -40,6 +40,6 @@ export class AppComponent implements OnInit {
     await this.router.navigate(['/']);
     await this.userService.logout();
   }
-
   
 }
+ 
