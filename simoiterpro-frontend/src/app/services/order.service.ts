@@ -18,4 +18,9 @@ export class OrderService {
     const params = new HttpParams().set('userId', userId);
     return this.http.post<Order>(apiUrl, order, {headers, params});
   }
+
+  getOrdersByUser(userId: string,minTotal?:number, maxTotal?:number, startDate?:Date, endDate?:Date): Observable<Order[]> {
+    const params = new HttpParams().set('userId', userId);
+    return this.http.get<Order[]>(apiUrl, {headers, params});
+  }
 }
