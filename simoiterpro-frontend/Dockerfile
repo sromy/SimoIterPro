@@ -8,4 +8,4 @@ RUN npm run buildprod
 FROM nginx
 EXPOSE 80
 COPY ./nginx.conf /etc/nginx/conf.d/default.conf
-COPY --from=builder /app/dist/simoak-frontend /usr/share/nginx/html
+COPY --from=builder /app/dist/simoiterpro-frontend /usr/share/nginx/html
