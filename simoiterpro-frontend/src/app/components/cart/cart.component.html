@@ -1,8 +1,8 @@
 <div class="container" *ngIf="(userinfo$ | async) as userinfo">
     <div>
         <span class="text-primary">
-            <i class="oi oi-basket h4"></i>
-            My Order
+            <i class="h4"></i>
+            Cart
         </span>
     </div>
     <table class="table table-bordered table-striped table-hover table-sm">
@@ -19,7 +19,7 @@
             <tr *ngIf="(!!userinfo.order && userinfo.order.length == 0) || 
                          (!!userinfo.order.items && userinfo.order.items.length == 0)">
                 <td colspan="5" class="table-light">
-                    <div class="text-center"><strong>No orders found</strong></div>
+                    <div class="text-center"><strong>No products found</strong></div>
                 </td>
             </tr>
             <tr *ngFor="let orderitem of userinfo.order.items">
@@ -33,9 +33,9 @@
             </tr>
         </tbody>
     </table>
-    <div class="modal-footer">
+    <div *ngIf="(userinfo.order.items.length > 0) ">
         <button type="button" class="btn btn-primary" (click)="onCreateOrder()">Create Order</button>
-    </div>
+    </div> 
 
     <ng-template #editOrderItemTemplate>
         <div class="modal-header bg-primary text-white">

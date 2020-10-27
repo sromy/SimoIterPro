@@ -2,6 +2,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule,  APP_INITIALIZER } from '@angular/core';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
+import { DatePipe } from '@angular/common';
 import { KeycloakService, KeycloakAngularModule } from 'keycloak-angular';
 import {BsDropdownModule} from 'ngx-bootstrap/dropdown'
 import {CollapseModule} from 'ngx-bootstrap/collapse'
@@ -18,6 +19,12 @@ import { OrdersComponent } from './components/orders/orders.component';
 import { MyOrdersComponent } from './components/my-orders/my-orders.component';
 import { MessageComponent } from './components/message/message.component';
 import { CartComponent } from './components/cart/cart.component';
+
+import { LOCALE_ID } from '@angular/core';
+import { registerLocaleData } from '@angular/common';
+import localeitIT from '@angular/common/locales/it';
+
+registerLocaleData(localeitIT);
 
 export function kcInitializer(keycloak: KeycloakService): () => Promise<any> {
 
@@ -65,7 +72,11 @@ export function kcInitializer(keycloak: KeycloakService): () => Promise<any> {
     ModalModule.forRoot(), 
     BsDropdownModule.forRoot()
   ],
-  providers: [{ provide: APP_INITIALIZER, useFactory: kcInitializer, multi: true, deps: [KeycloakService] }],
+  providers: [
+    DatePipe,
+    { provide: APP_INITIALIZER, useFactory: kcInitializer, multi: true, deps: [KeycloakService] },
+    { provide: LOCALE_ID, useValue: "it-IT" }
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

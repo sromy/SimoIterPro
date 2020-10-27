@@ -1,33 +1,74 @@
 <div class="container">  
     <span class="text-primary">
-        <i class="h4"></i>
+        <i class="h3"></i>
         My Orders 
     </span>
-    <table class="table table-bordered table-hover table-sm">
-        <thead class="bg-primary text-white">
-            <tr>
-                <th scope="col" class="text-center" style="width:100px;">OrderId</th>                    
-                <th scope="col" class="text-center" style="width:100px;">Creation Date</th>                
-                <th scope="col" class="text-right" style="width:100px;">Total</th>
-                <th scope="col" class="text-center" style="width:100px;">Actions</th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr *ngIf="!!myorders && myorders.length == 0">
-                <td colspan="4" class="table-light">
-                    <div class="text-center"><strong>No orders found</strong></div>
-                </td>
-            </tr>
-            <tr *ngFor="let order of myorders">
-                <td class="text-center">{{order.orderId}}</td>
-                <td class="text-center">{{order.creationDate | date:'yyyy-MM-dd HH:mm'}}</td>                                
-                <td class="text-right">{{order.total | number:'1.2-2'}}</td>
-                <td class="text-center">
-                    <i class="oi oi-eye text-primary" tooltip="Show Order" (click)="showOrder(showOrderTemplate, order)"></i>
-                </td>
-            </tr>
-        </tbody>
-    </table>
+    <div class="card">
+        <div class="card-header bg-primary">
+          <h5 class="text-white float-left">Search Filters</h5>          
+        </div>
+        <div class="card-body">
+            <form [formGroup]="searchForm">    
+            <div class="row">            
+                <div class="col-3 form-group">
+                    <label for="minTotal">Min Total</label>
+                    <input type="text" formControlName="minTotal" class="form-control" id="minTotal" 
+                        required placeholder="0.00" appTwoDigitDecimalNumber >
+                </div>
+                <div class="col-3 form-group">
+                    <label for="maxTotal">Max Total</label>
+                    <input type="text" formControlName="maxTotal" class="form-control" id="maxTotal" 
+                        required placeholder="0.00" appTwoDigitDecimalNumber >
+                </div>
+                <div class="col-3 form-group">
+                    <label for="effectiveDate">Effective Date<span class="text-danger">*</span></label>
+                    <input type="date" formControlName="startDate" class="form-control" id="startDate" >
+                </div>
+                <div class="col-3 form-group">
+                    <label for="effectiveDate">Effective Date<span class="text-danger">*</span></label>
+                    <input type="date" formControlName="endDate" class="form-control" id="endDate" >
+                </div>             
+            </div> 
+            <div class="row">&nbsp;</div>                     
+            <div class="row">            
+                <div class="col-3">
+                    <button type="button" class="btn btn-primary" (click)="searchOrderByFilters()" >Search</button>
+                </div>
+            </div>          
+            </form>  
+        </div>
+    </div>       
+    <div class="card">
+        <!--div class="card-header bg-primary">   
+            <h5 class="text-white float-left">Orders</h5>       
+        </div-->
+        <div class="card-body"> 
+            <table class="table table-bordered table-hover table-sm">
+                <thead class="bg-primary text-white">
+                    <tr>
+                        <th scope="col" class="text-center" style="width:100px;">OrderId</th>                    
+                        <th scope="col" class="text-center" style="width:100px;">Creation Date</th>                
+                        <th scope="col" class="text-right" style="width:100px;">Total</th>
+                        <th scope="col" class="text-center" style="width:100px;">Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngIf="!!myorders && myorders.length == 0">
+                        <td colspan="4" class="table-light">
+                            <div class="text-center"><strong>No orders found</strong></div>
+                        </td>
+                    </tr>
+                    <tr *ngFor="let order of myorders">
+                        <td class="text-center">{{order.orderId}}</td>
+                        <td class="text-center">{{order.creationDate | date:'yyyy-MM-dd HH:mm'}}</td>                                
+                        <td class="text-right">{{order.total | number:'1.2-2'}}</td>
+                        <td class="text-center">
+                            <i class="oi oi-eye text-primary" tooltip="Show Order" (click)="showOrder(showOrderTemplate, order)"></i>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>    
 </div>
 
 <ng-template #showOrderTemplate>
