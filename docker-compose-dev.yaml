@@ -16,6 +16,8 @@ services:
       dockerfile: Dockerfile
     ports: 
       - "8080:8081"
+    environment:
+       - "SPRING_PROFILES_ACTIVE=dev"  
     depends_on:
       - db  
       

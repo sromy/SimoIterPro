@@ -1,7 +1,7 @@
 import { KeycloakConfig } from 'keycloak-angular';
 
 let keycloakConfig: KeycloakConfig = {
-  url: 'http://localhost:8180/auth',
+  url: 'http://keycloak:8080/auth',
   realm: 'simoiterprorealm',
   clientId: 'simoiterpro'
 };
