@@ -15,12 +15,12 @@
 		
 6. lanciare il comando di compilazione
 	
-	docker-compose -f docker-compose-prod.yaml build
+		docker-compose -f docker-compose-prod.yaml build
 
 		
 7. lanciare il comando per avviare i container
 	
-	docker-compose -f docker-compose-prod.yaml up
+		docker-compose -f docker-compose-prod.yaml up
 		
 8. aprire la Administration Console di keycloak dall'url **http://localhost:8080/**	 con le credenziali admin/admin		
 	- importare il realm file **simoiterpro-realm.json**
